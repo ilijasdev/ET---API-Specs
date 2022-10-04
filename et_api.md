@@ -1,5 +1,12 @@
 # EVMOS TRACKER NEED API
-### __Home Module__
+__Table of Contents__
+
+- Home Module _(2 endpoints)_
+- Wallet Inspector  Module _(3 endpoints)_
+
+-----
+
+## __1. Home Module__
 ##### `GET /api/documents/tokens`
 - Retrieve all Evmos tokens data (sorted by number of holders?).
 - We should somehow blacklist those airdroped tokens that are distributed in bulk to wallets because those are mostly scams.
@@ -47,7 +54,10 @@ Response body:
 
 
 -----
-### __Wallet Inspector__
+
+
+
+## __2. Wallet Inspector Module__
 ##### `GET /api/wallet/tokens`
 - Retrieve all Evmos tokens for wallet with native blockchain token amount ($EVMOS).
 ```
