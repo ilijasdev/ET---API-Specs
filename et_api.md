@@ -1,15 +1,8 @@
 # EVMOS TRACKER NEED API
-__Table of Contents__
-
-- Home Module _(2 endpoints)_
-- Wallet Inspector  Module _(3 endpoints)_
-
------
-
-## __1. Home Module__
+### __Home Module__
 ##### `GET /api/documents/tokens`
-- Retrieve all Evmos tokens data (sorted by number of holders?).
-- We should somehow blacklist those airdroped tokens that are distributed in bulk to wallets because those are mostly scams.
+- Retrieve all Evmos tokens data (sorted by number of holders?). 
+- We should somehow blacklist those airdroped tokens that are distributed in bulk to wallets because those are mostly scams. 
 ```
 Query parameters:
 - page_no=1
@@ -31,7 +24,7 @@ Response body:
 }
 ```
 ##### `GET /api/documents/nfts`
-- Retrieve Evmos NFTs Collections (sorted by number of contract interactions?).
+- Retrieve Evmos NFTs Collections (sorted by number of contract interactions?). 
 - We should somehow exclude those collections that are not on marketplaces like [OrbitMarkets](https://www.orbitmarket.io).
 ```
 Query parameters:
@@ -57,7 +50,14 @@ Response body:
 
 
 
-## __2. Wallet Inspector Module__
+
+
+
+
+
+
+
+### __Wallet Inspector__
 ##### `GET /api/wallet/tokens`
 - Retrieve all Evmos tokens for wallet with native blockchain token amount ($EVMOS).
 ```
@@ -102,7 +102,7 @@ Response body:
 ```
 Query parameters:
 - wallet=0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c
-- time=24h | 7d | 30d | 60d | 180d | 1y | all
+- time=24h|7d|30d|60d|180d|1y|all
 ```
 ```js
 Response body:
@@ -119,7 +119,7 @@ Response body:
 ```
 Query parameters:
 - wallet=0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c
-- time=24h | 7d | 30d | 60d | 180d | 1y | all
+- time=24h|7d|30d|60d|180d|1y|all
 ```
 ```js
 Response body:
@@ -141,7 +141,7 @@ Response body:
 ```
 Query parameters:
 - wallet=0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c
-- time=24h | 7d | 30d | 60d | 180d | 1y | all
+- time=24h|7d|30d|60d|180d|1y|all
 ```
 ```js
 Response body:
@@ -158,3 +158,75 @@ Response body:
   }]
 }
 ```
+
+
+
+
+
+
+
+
+
+### __Token Inspector Module__
+##### `GET /api/token`
+- Retrieve token data.
+```
+Query parameters:
+- contract=0xD4949664cD82660AaE99bEdc034a0deA8A0bd517
+```
+```js
+Response body:
+{
+  "token_details": {
+      "total_supply": number,
+      "holders": number,
+      "transfers": number,
+      "decimals": number,
+      "token_type": number,
+      "token_price?": number,
+      "token_fdv?": number
+  }
+}
+```
+##### `GET /api/token/transfers`
+- Retrieve token transactions (swaps/burns/contract interactions etc.).
+```
+Query parameters:
+- contract=0xD4949664cD82660AaE99bEdc034a0deA8A0bd517
+```
+```js
+Response body:
+{
+  "token_details": {
+      "transaction_type": "transfer" | "swap" | "burn",
+      "from_address": string,
+      "to_address": string,
+      "token_amount": number,
+      "token_usd_value?": number
+  }
+}
+```
+##### `GET /api/token/swaps`
+- Retrieve token DEX swaps.
+```
+Query parameters:
+- contract=0xD4949664cD82660AaE99bEdc034a0deA8A0bd517
+- time=24h|7d|30d|60d|180d|1y|all
+```
+```js
+Response body:
+{
+  "token_swaps": {
+      "date_point": Date,
+      "trades": number,
+      "usd_volume?": number,
+      "dex_contract?": [{
+          "contract": string,
+          "contract_label": string,
+          "trading_amount": number,
+          "number_of_trades": number
+      }]
+  }
+}
+```
+-----
